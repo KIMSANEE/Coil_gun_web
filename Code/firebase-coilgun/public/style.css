@@ -1,0 +1,106 @@
+.watch {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #804000, #402000);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .dial {
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .hour-hand,
+  .minute-hand,
+  .second-hand {
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .hour-hand {
+    width: 4px;
+    height: 40px;
+    margin-top: -40px;
+    z-index: 3;
+  }
+  
+  .minute-hand {
+    width: 3px;
+    height: 60px;
+    margin-top: -60px;
+    z-index: 2;
+  }
+  
+  .second-hand {
+    width: 2px;
+    height: 80px;
+    margin-top: -80px;
+    z-index: 1;
+  }
+  
+  .time-scale {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  .time-scale:nth-child(1) {
+    transform: rotate(30deg);
+  }
+  
+  .time-scale:nth-child(2) {
+    transform: rotate(60deg);
+  }
+  
+  .time-scale:nth-child(3) {
+    transform: rotate(90deg);
+  }
+  
+  .time-scale:nth-child(4) {
+    transform: rotate(120deg);
+  }
+  
+  .time-scale:nth-child(5) {
+    transform: rotate(150deg);
+  }
+  
+  .time-scale:nth-child(6) {
+    transform: rotate(180deg);
+  }
+  
+  .time-scale:nth-child(7) {
+    transform: rotate(210deg);
+  }
+  
+  .time-scale:nth-child(8) {
+    transform: rotate(240deg);
+  }
+  
+  .time-scale:nth-child(9) {
+    transform: rotate(270deg);
+  }
+  
+  .time-scale:nth-child(10) {
+    transform: rotate(300deg);
+  }
+  
+  .time-scale:nth-child(11) {
+    transform: rotate(330deg);
+  }
+  
+  @media (max)

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Raleway);
+
+    body {
+      background-image: url("https://github.githubassets.com/images/modules/site/home-campaign/hero-bg.webp");
+      background-size: cover;
+      height: 1000px;
+    }
+
+    #canvas {
+      left: 25%;
+      margin-top: 15%;
+      position: absolute;
+    }
+
+    [class*="button"] {
+      line-height: 90px;
+      font-size: 50px;
+      font-family: Raleway;
+      margin-top: 55px;
+      background-color: #ff0066;
+      border-radius: 100px;
+      padding: 0;
+      left: 50%;
+      margin-left: -60px;
+      border-bottom: 30px solid #990033;
+      position: absolute;
+      width: 120px;
+      height: 85px;
+      transition: 0.5s;
+      text-align: center;
+    }
+
+    .button:active {
+      margin-top: 85px;
+      border-bottom: 0px solid black;
+      transition: 0.25s;
+      /* animation: chaos 1s; */
+    }
+
+    .button a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .button1 {
+      background-color: Gainsboro;
+      width: 150px;
+      height: 100px;
+      border-bottom: 20px solid Grey;
+      z-index: -1;
+      left: 50%;
+      margin-left: -75px;
+      margin-top: 75px;
+      animation: null 1s;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+    import { getDatabase, ref, set ,onValue,get} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7Jng3b2Dv446U5aDyOB2GVumvHJ6CB-o",
+      authDomain: "coil-gun.firebaseapp.com",
+      databaseURL: "https://coil-gun-default-rtdb.firebaseio.com",
+      projectId: "coil-gun",
+      storageBucket: "coil-gun.appspot.com",
+      messagingSenderId: "728095883116",
+      appId: "1:728095883116:web:3b24cfcce8738528473d49",
+      measurementId: "G-4JS01Q5DPH"
+    };
+
+  
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    let v1;
+    let v2;
+    let v3;
+    let v4;
+
+
+    const loadValueAfterDelay = async () => {
+  await delay(5000); // Wait for 5 seconds
+
+  const valueRef1 = ref(db, 'Valocity/v1/');
+  const valueRef2 = ref(db, 'Valocity/v2/');
+  const valueRef3 = ref(db, 'Valocity/v3/');
+  const valueRef4 = ref(db, 'Valocity/v4/');
+
+  get(valueRef1)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        v1 = snapshot.val();
+        delay(300);
+
+      } else {
+        console.log('Value does not exist at the specified path.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error loading value:', error);
+    });
+    get(valueRef2)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        v2 = snapshot.val();
+        delay(300);
+
+      } else {
+        console.log('Value does not exist at the specified path.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error loading value:', error);
+    });
+    get(valueRef3)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        v3 = snapshot.val();
+        delay(300);
+
+
+      } else {
+        console.log('Value does not exist at the specified path.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error loading value:', error);
+    });
+    get(valueRef4)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        v4 = snapshot.val();
+        delay(300);
+
+
+      } else {
+        console.log('Value does not exist at the specified path.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error loading value:', error);
+    });
+    
+    await delay(1000);
+};
+
+document.getElementById('bt').addEventListener('click', async () => {
+      await set(ref(db,'Switch/'),true);
+      await loadValueAfterDelay();
+      Chart.defaults.global.defaultFontColor = '#fff';
+
+var randomScalingFactor = function () {
+  return Math.round(Math.random() * 100);
+  //return 0;
+};
+var randomColorFactor = function () {
+  return Math.round(Math.random() * 255);
+};
+var randomColor = function (opacity) {
+  return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+};
+
+var config = {
+  type: 'line',
+  defaultFontColor: "#fff",
+  data: {
+    labels: ["시작","코일1","코일2","코일3","종점"],
+    datasets: [{
+      label: "속도(m/s)",
+      data: [0,v1,v2,v3,v4],
+      fontColor: "#fff"
+    }],
+  },
+  options: {
+    responsive: true,
+    title: {
+      display: true,
+      text: '코일건 속도 그래프',
+      fontColor: "#fff"
+    },
+    tooltips: {
+      mode: 'label',
+      callbacks: {
+      }
+    },
+    hover: {
+      mode: 'dataset'
+    },
+    scales: {
+      xAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+        },
+        gridLines: {
+          color: 'rgba(255,255,255,0.5)'
+        },
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: '속도(m/s)'
+        },
+        ticks: {
+          suggestedMin: 0.1,
+          suggestedMax: 2,
+        },
+        gridLines: {
+          color: 'rgba(255,255,255,0.5)'
+        }
+      }]
+    }
+  }
+};
+$.each(config.data.datasets, function (i, dataset) {
+  dataset.borderColor = randomColor(0.4);
+  dataset.backgroundColor = randomColor(0.5);
+  dataset.pointBorderColor = randomColor(0.7);
+  dataset.pointBackgroundColor = randomColor(0.5);
+  dataset.pointBorderWidth = 1;
+  dataset.lineTension= 0;
+});
+function show() {
+  var ctx = document.getElementById("canvas").getContext("2d");
+  window.myLine = new Chart(ctx, config);
+};
+      await show();
+      console.log(v1)
+      console.log(v2)
+      console.log(v3)
+      console.log("hi")
+    })
+    document.getElementById('test').addEventListener('click', async () => {
+      await set(ref(db,'Switch/'),true);
+      console.log(v1)
+      console.log(v2)
+      console.log(v3)
+      console.log("hi")
+    })
+
+
+
+    
+  </script>
+
+  <div class="button" id="bt"> <a style="color: #ff0066;"> </a> </div>
+  <div class="button1"></div>
+  <div style="width:50%;">
+    <canvas id="canvas"></canvas>
+  </div>
+<div>
+  <h1><a href="distance.html">🔙</a></h1>
+</div>
+  
+
+  <script>
+   
+
+    
+  </script>
+</body>
+
+</html>
